@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   Function refresh;
-  LoginPage({Key key, this.refresh}) : super(key: key);
+  RegisterPage({Key key, this.refresh}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   void refresh() {
     setState(() {});
   }
@@ -20,15 +20,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: login(),
+      child: register(),
     );
   }
 
-  Scaffold login() {
+  Scaffold register() {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
-        backgroundColor: kOrange,
+        title: Text("Register"),
+        backgroundColor: kGreen,
       ),
       body: SingleChildScrollView(
         reverse: true,
@@ -39,13 +39,13 @@ class _LoginPageState extends State<LoginPage> {
               // 1
               Container(height: 20),
               SizedBox(
-                height: 180,
+                height: 150,
                 child: Image.asset(
-                  "assets/logo.png",
+                  "assets/register.png",
                   fit: BoxFit.contain,
                 ),
               ),
-              Container(height: 30),
+              Container(height: 20),
               // 2
               myTextField(
                 text: "Username",
@@ -57,19 +57,25 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
                 onChanged: (value) => kPassword = value,
               ),
+
+              // 3.5
+              myTextField(
+                text: "Email",
+                onChanged: (value) => kEmail = value,
+              ),
               // 4
               myButton(
-                text: "Login",
+                text: "Create a New Account",
                 color: kOrange,
-                onPressed: () => login_DB(),
+                onPressed: () => register_DB(),
               ),
               // 5
               Container(height: 20),
               myButton(
-                text: "Create a New Account",
+                text: "Cancel",
                 color: kGreen,
                 onPressed: () {
-                  kPage = "Register";
+                  kPage = "Login";
                   widget.refresh();
                 },
               ),
@@ -81,22 +87,26 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<List> login_DB() async {
-    if (kUsername == "" || kPassword == "") {
+  Future<List> register_DB() async {
+    if (kUsername == "" || kPassword == "" || kEmail == "") {
       myDialog(context, "Fill all the fields");
       return null;
     }
     final response =
-        await http.post("http://aldha.dev/BookShare/login.php", body: {
+        await http.post("http://aldha.dev/BookShare/register.php", body: {
       "username": kUsername,
       "password": kPassword,
+      "email": kEmail,
     });
 
     print(response.body);
     if (response.body == kUsername) {
-      kPage = "Home";
+      kPage = "Login";
+      kUsername = "";
       kPassword = "";
+      kEmail = "";
       widget.refresh();
+      myDialog(context, "User Created Successfully");
     } else {
       myDialog(context, response.body);
     }

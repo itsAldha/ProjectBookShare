@@ -1,3 +1,5 @@
+import 'package:BookShare/constants.dart';
+import 'package:BookShare/register.dart';
 import 'package:flutter/material.dart';
 import "login.dart";
 import "home.dart";
@@ -10,22 +12,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void changePage(String p) {
-    setState(() {
-      page = p;
-    });
+  void refresh() {
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: loadPage(changePage));
+    return MaterialApp(home: loadPage());
   }
-}
 
-String page = "Login";
-
-Scaffold loadPage(Function changePage) {
-  if (page == "Login")
-    return loginPage(changePage);
-  else if (page == "Home") return homePage(changePage);
+  Widget loadPage() {
+    if (kPage == "Login")
+      return LoginPage(refresh: refresh);
+    else if (kPage == "Home")
+      return HomePage(refresh: refresh);
+    else if (kPage == "Register") return RegisterPage(refresh: refresh);
+  }
 }
