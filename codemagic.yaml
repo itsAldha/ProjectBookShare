@@ -6,8 +6,8 @@ workflows:
         name: BookShare
         environment:
             vars:
-                XCODE_WORKSPACE: "BookShareWorkspace"
-                XCODE_SCHEME: "BookShareScheme"
+                XCODE_WORKSPACE: "MyXcodeProject"
+                XCODE_SCHEME: "MyScheme"
             xcode: latest
             cocoapods: default
         scripts:
