@@ -3,7 +3,7 @@
 
 workflows:
     ios-app:
-        name: iOS App
+        name: BookShare
         environment:
             vars:
                 XCODE_WORKSPACE: "BookShareWorkspace"
