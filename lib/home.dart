@@ -38,21 +38,44 @@ class _HomePageState extends State<HomePage> {
                 height: 100,
                 alignment: Alignment.center,
                 child: Text(
-                  "Welcome, $kUsername",
+                  "Welcome, $kUsername.",
                   style: TextStyle(fontSize: 18),
                 ),
               ),
               // 2
               myButton(
-                text: "Logout",
+                text: "Look for a Book",
                 color: kGreen,
+                onPressed: () {},
+              ),
+              Container(height: 20),
+              // 3
+              myButton(
+                text: "Add a Book",
+                color: kOrange,
+                onPressed: () {
+                  kPage = "AddABook";
+                  widget.refresh();
+                },
+              ),
+              Container(height: 20),
+              // 4
+              myButton(
+                text: "Messages",
+                color: kGreen,
+                onPressed: () {},
+              ),
+              Container(height: 20),
+              // 5
+              myButton(
+                text: "Logout",
+                color: Colors.grey,
                 onPressed: () {
                   kUsername = "";
                   kPage = "Login";
                   widget.refresh();
                 },
               ),
-              // 3
               // end
             ],
           ),

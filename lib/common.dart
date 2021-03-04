@@ -6,7 +6,8 @@ Widget myTextField(
     bool obscureText = false,
     Function(String) onChanged,
     double width = 250,
-    double height = 70}) {
+    double height = 70,
+    double lines = 1}) {
   return Container(
     width: width,
     height: height,
@@ -15,6 +16,9 @@ Widget myTextField(
         hintText: text,
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
+      ),
+      style: TextStyle(
+        height: lines,
       ),
       autocorrect: false,
       obscureText: obscureText,
@@ -28,10 +32,11 @@ Widget myButton({
   Color color,
   Function onPressed,
   double width = 250,
+  double height = 50,
 }) {
   return Container(
     width: width,
-    height: 50,
+    height: height,
     child: Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(32),
